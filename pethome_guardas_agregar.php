@@ -908,7 +908,7 @@ $guarda_data = array_merge($default_values, $guarda_data);
         const reservaSaldoFinalDisplay = document.getElementById('reserva_saldo_final');
         const fechasSeleccionadasTexto = document.getElementById('fechas_seleccionadas_texto'); // Nuevo elemento
 
-        let selectedDates = [];
+        let selectedDates = []; // <--- ¡DEJÁ ESTA SOLA DECLARACIÓN!
         let flatpickrInstance;
 
 // ... (tu código JavaScript que tengas antes de la inicialización de Flatpickr) ...
@@ -916,9 +916,9 @@ $guarda_data = array_merge($default_values, $guarda_data);
 /*────────── Inicialización de Flatpickr ──────────*/
 
 // Conseguimos la referencia al NUEVO div contenedor donde Flatpickr se va a dibujar
-const inlineCalendarContainer = document.getElementById('pethome_flatpickr_inline_calendar_container'); 
+const inlineCalendarContainer = document.getElementById('pethome_flatpickr_inline_calendar_container');
 
-let selectedDates = []; // Asegurate que esta variable esté definida en tu scope (global o de la función)
+// Aca NO va más: let selectedDates = []; // <--- ¡ESTA LÍNEA DEBE SER ELIMINADA!
 
 // Solo inicializamos Flatpickr si encontramos ambos elementos, para evitar errores
 if (calendarioFechasInput && inlineCalendarContainer) {
@@ -948,7 +948,7 @@ if (calendarioFechasInput && inlineCalendarContainer) {
         onChange: function(selectedDatesArr, dateStr, instance) {
             selectedDates = selectedDatesArr;
             calendarioFechasInput.value = dateStr; // Actualizamos el valor del input de texto "oculto"
-            updateCalculs(); // Llama a tu función de cálculos
+            updateCalculations(); // Llama a tu función de cálculos
             updateFechasSeleccionadasTexto(); // Llama a tu función para actualizar el texto de fechas seleccionadas
         },
 
@@ -1174,3 +1174,4 @@ if (calendarioFechasInput && inlineCalendarContainer) {
         });
 
     });
+</script>
