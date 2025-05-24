@@ -173,25 +173,26 @@ if ( is_admin() ) {
     }
 
     /**
-     * 2.d) Enqueue Flatpickr & Autocomplete solo en “Agregar Guarda”
-     */
-    add_action( 'admin_enqueue_scripts', function( $hook ) {
-        if ( $hook === 'pethome_page_pethome_guardas_agregar' ) {
-            wp_enqueue_style(  'flatpickr-css', 'https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css' );
-            wp_enqueue_script( 'flatpickr-js',  'https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.js', [], null, true );
-            $js = plugin_dir_path(__FILE__).'assets/js/autocompletar.js';
-            if ( file_exists( $js ) ) {
-                wp_enqueue_script(
-                    'pethome-autocomplete',
-                    plugin_dir_url(__FILE__).'assets/js/autocompletar.js',
-                    [], filemtime($js), true
-                );
-                wp_localize_script( 'pethome-autocomplete', 'ajax_object', [
-                    'ajax_url' => admin_url('admin-ajax.php')
-                ] );
-            }
+ * 2.d) Enqueue Flatpickr & Autocomplete solo en “Agregar Guarda”
+ */
+add_action( 'admin_enqueue_scripts', function( $hook ) {
+    if ( $hook === 'pethome_page_pethome_guardas_agregar' ) {
+        // CAMBIA ESTA LÍNEA
+        wp_enqueue_style( 'flatpickr-css', 'https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css' ); // <--- AQUÍ EL CAMBIO
+        wp_enqueue_script( 'flatpickr-js',  'https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.js', [], null, true );
+        $js = plugin_dir_path(__FILE__).'assets/js/autocompletar.js';
+        if ( file_exists( $js ) ) {
+            wp_enqueue_script(
+                'pethome-autocomplete',
+                plugin_dir_url(__FILE__).'assets/js/autocompletar.js',
+                [], filemtime($js), true
+            );
+            wp_localize_script( 'pethome-autocomplete', 'ajax_object', [
+                'ajax_url' => admin_url('admin-ajax.php')
+            ] );
         }
-    } );
+    }
+} );
 
     /**
      * 2.e) Importador y handler de guardas
